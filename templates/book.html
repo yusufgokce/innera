@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Book A Session - Innera{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h2>Book a Session</h2>
+        <p>Take the first step toward healing and growth</p>
+    </div>
+</section>
+
+<section class="content-section" style="background: white;">
+    <h2>Schedule Your Appointment</h2>
+    <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">
+        Select a convenient time below to book your session. We offer flexible scheduling to accommodate your needs.
+    </p>
+
+    <!-- Calendly inline widget begin -->
+    <div class="calendly-inline-widget" data-url="https://calendly.com/elfgokce/standardsession?hide_gdpr_banner=1&primary_color=d9a7d7" style="min-width:320px;height:700px;"></div>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <!-- Calendly inline widget end -->
+
+    <div style="text-align: center; margin-top: 3rem; padding-top: 3rem; border-top: 1px solid #e8e8e8;">
+        <p style="font-size: 1.1rem; margin-bottom: 1rem; color: #5a5a5a;">
+            Questions about booking?
+        </p>
+        <p style="font-size: 0.95rem; color: #5a5a5a;">
+            Email us at <a href="mailto:info@innera.com" style="color: #2d2d2d;">info@innera.com</a> or call <a href="tel:5551234567" style="color: #2d2d2d;">(555) 123-4567</a>
+        </p>
+    </div>
+</section>
+{% endblock %}

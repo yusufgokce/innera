@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}About - Innera{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h2>About Innera</h2>
+        <p>Innera is dedicated to creating a safe, confidential space where clients can explore their experiences and work toward meaningful change. We bring quality, compassionate care tailored to each person's unique journey. Currently our team is a one-person team, but we're hoping to expand soon.</p>
+        <a href="#therapist" class="cta-button smooth-scroll">Learn More</a>
+    </div>
+</section>
+
+<section class="content-section" style="background: white;" id="therapist">
+    {% include "therapist_profile.html" %}
+</section>
+{% endblock %}
