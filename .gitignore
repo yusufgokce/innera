@@ -28,6 +28,11 @@ wheels/
 .env
 .env.local
 
+# Docker
+nginx/ssl/*.pem
+nginx/ssl/*.key
+nginx/ssl/*.crt
+
 # IDE
 .vscode/
 .idea/
