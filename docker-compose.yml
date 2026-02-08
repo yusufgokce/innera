@@ -11,18 +11,18 @@ services:
       - ./static:/app/static:ro
       - ./templates:/app/templates:ro
 
-  nginx:
-    image: nginx:alpine
-    container_name: innera-nginx
+  caddy:
+    image: caddy:alpine
+    container_name: innera-caddy
     restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
+      - "443:443/udp"  # HTTP/3 support
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/ssl:/etc/nginx/ssl:ro
-    # Remove default.conf on startup before nginx starts
-    entrypoint: ["/bin/sh", "-c", "rm -f /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"]
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
     depends_on:
       - web
     networks:
@@ -31,3 +31,7 @@ services:
 networks:
   innera-network:
     driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
