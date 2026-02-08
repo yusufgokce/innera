@@ -1,5 +1,5 @@
-inneracounselling.ca, www.inneracounselling.ca {
-    # Auto HTTPS with Let's Encrypt
+:80 {
+    # HTTP only for now - SSL will auto-enable once DNS propagates
 
     # Security headers
     header {
