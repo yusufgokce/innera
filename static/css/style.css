@@ -450,6 +450,15 @@ footer {
         font-size: 0.9rem;
     }
 
+    .hero-content {
+        grid-template-columns: 1fr;
+        padding: 8vw 6vw;
+    }
+
+    .content-section {
+        padding: 8vw 6vw;
+    }
+
     .two-column {
         grid-template-columns: 1fr;
         gap: 3rem;

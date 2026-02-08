@@ -1,6 +1,4 @@
 :80 {
-    # HTTP only for now - SSL will auto-enable once DNS propagates
-
     # Security headers
     header {
         X-Frame-Options "SAMEORIGIN"
@@ -26,6 +24,34 @@
     header @static Cache-Control "public, max-age=2592000, immutable"
 
     # Logs
+    log {
+        output file /var/log/caddy/access.log
+    }
+}
+
+# Tailscale Funnel configuration
+inneracounselling.ca {
+    reverse_proxy web:8000 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+
+    # Security headers
+    header {
+        X-Frame-Options "SAMEORIGIN"
+        X-Content-Type-Options "nosniff"
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy "no-referrer-when-downgrade"
+    }
+
+    encode gzip
+
+    @static {
+        path /static/*
+    }
+    header @static Cache-Control "public, max-age=2592000, immutable"
+
     log {
         output file /var/log/caddy/access.log
     }
