@@ -1,15 +1,6 @@
 inneracounselling.ca, www.inneracounselling.ca {
     # Auto HTTPS with Let's Encrypt
 
-    # Rate limiting
-    rate_limit {
-        zone general {
-            key {remote_host}
-            events 600
-            window 1m
-        }
-    }
-
     # Security headers
     header {
         X-Frame-Options "SAMEORIGIN"
