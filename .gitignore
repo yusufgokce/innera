@@ -46,3 +46,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Documentation with sensitive info
+SETUP_GUIDE.md
+DEPLOYMENT_GUIDE.txt
