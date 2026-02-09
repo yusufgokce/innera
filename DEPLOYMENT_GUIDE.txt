@@ -1,0 +1,548 @@
+===========================================
+INNERA WEBSITE - DEPLOYMENT & MAINTENANCE GUIDE
+===========================================
+Last Updated: 2026-02-09
+
+CURRENT STACK
+=============
+- FastAPI (Python web framework) - Direct exposure on port 8000
+- Docker (containerization) - Single container setup
+- Cloudflare Tunnel (SSL + public access) - Handles all HTTPS
+- Tailscale VPN (SSH admin access only)
+- GitHub (version control)
+
+SERVER DETAILS
+==============
+- Machine: T8 (N100 Linux machine)
+- Local IP: 192.168.4.43
+- Tailscale IP: 100.120.234.126
+- Public Domain: inneracounselling.ca
+- SSH Port: 2222
+- SSH Access: ssh -p 2222 yusuf@100.120.234.126
+
+PERFORMANCE SPECS
+=================
+Load Test Results (Apache Bench):
+- Requests per second: 2,561
+- Average response time: 39ms
+- Concurrent capacity: 500+ users
+- Expected traffic: 5-20 concurrent users
+- Overhead: 100x-500x more capacity than needed
+
+IMPORTANT FILES & LOCATIONS
+===========================
+Project Directory: ~/Desktop/innera/
+
+Key Files:
+- docker-compose.yml (Docker configuration - FastAPI only, no Caddy)
+- Dockerfile (Container build instructions)
+- main.py (FastAPI application)
+- .env (Environment variables - NEVER commit this!)
+- requirements.txt (Python dependencies)
+- static/css/style.css (Styling with mobile responsive design)
+- templates/home.html (Homepage with updated headline)
+- /etc/cloudflared/config.yml (Tunnel configuration)
+- ~/.cloudflared/b40b18d5-21c5-4e12-b1cd-3d2f9f5dc23a.json (Tunnel credentials)
+
+REMOVED/DEPRECATED:
+- caddy/ directory (no longer used - Cloudflare handles SSL)
+- nginx/ directory (never used in production)
+
+CLOUDFLARE TUNNEL DETAILS
+==========================
+Tunnel Name: innera-new
+Tunnel ID: b40b18d5-21c5-4e12-b1cd-3d2f9f5dc23a
+Config File: /etc/cloudflared/config.yml
+
+Current Tunnel Config:
+tunnel: b40b18d5-21c5-4e12-b1cd-3d2f9f5dc23a
+credentials-file: /home/yusuf/.cloudflared/b40b18d5-21c5-4e12-b1cd-3d2f9f5dc23a.json
+
+ingress:
+  - hostname: inneracounselling.ca
+    service: http://localhost:8000
+  - hostname: www.inneracounselling.ca
+    service: http://localhost:8000
+  - service: http_status:404
+
+CLOUDFLARE DNS RECORDS
+=======================
+Type: CNAME
+Name: inneracounselling.ca
+Content: b40b18d5-21c5-4e12-b1cd-3d2f9f5dc23a.cfargotunnel.com
+Proxy: ON (orange cloud)
+TTL: Auto
+
+Type: CNAME
+Name: www
+Content: b40b18d5-21c5-4e12-b1cd-3d2f9f5dc23a.cfargotunnel.com
+Proxy: ON (orange cloud)
+TTL: Auto
+
+CLOUDFLARE SETTINGS
+===================
+SSL/TLS Encryption Mode: Flexible
+  - HTTPS from visitors to Cloudflare
+  - HTTP from Cloudflare to localhost:8000
+  - This is correct for our setup!
+
+Security Settings:
+- Always Use HTTPS: OFF
+- Automatic HTTPS Rewrites: OFF
+- HSTS: Disabled
+- Bot Fight Mode: Not yet enabled (optional)
+
+ARCHITECTURE DIAGRAM
+====================
+Public Traffic:
+  Visitor → HTTPS → Cloudflare CDN → Cloudflare Tunnel → HTTP → localhost:8000 → FastAPI
+
+Admin Access:
+  You (Mac) → Tailscale VPN → SSH Port 2222 → Server
+
+Complete Isolation:
+- Public visitors CANNOT access: local network, SSH, other devices
+- You (admin) access via: Tailscale VPN only (secure)
+- Cloudflare Tunnel: Outbound-only, no exposed ports
+
+MAKING CODE CHANGES
+===================
+1. SSH into server via Tailscale:
+   ssh -p 2222 yusuf@100.120.234.126
+
+2. Navigate to project:
+   cd ~/Desktop/innera
+
+3. Pull latest changes from GitHub:
+   git pull
+
+4. Rebuild and restart Docker:
+   docker-compose down
+   docker-compose up -d --build
+
+5. Verify container is running:
+   docker-compose ps
+
+6. Check logs if needed:
+   docker-compose logs -f
+
+7. Test locally:
+   curl http://localhost:8000
+
+PUSHING CODE CHANGES (FROM MAC)
+================================
+1. Make your changes locally in /Users/yusuf/Desktop/innera/
+
+2. Stage and commit:
+   git add -A
+   git commit -m "Description of changes
+
+   Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
+
+3. Push to GitHub:
+   git push
+   (Note: You handle git push manually due to SSH key setup)
+
+4. SSH to server and deploy:
+   ssh -p 2222 yusuf@100.120.234.126
+   cd ~/Desktop/innera
+   git pull
+   docker-compose down
+   docker-compose up -d --build
+
+5. Purge Cloudflare cache if needed:
+   - Cloudflare Dashboard → Caching → Purge Everything
+
+CLOUDFLARE TUNNEL MANAGEMENT
+==============================
+Check status:
+   sudo systemctl status cloudflared
+
+Restart tunnel:
+   sudo systemctl restart cloudflared
+
+View logs:
+   sudo journalctl -u cloudflared -n 50 --no-pager
+
+View real-time logs:
+   sudo journalctl -u cloudflared -f
+
+Stop tunnel:
+   sudo systemctl stop cloudflared
+
+Start tunnel:
+   sudo systemctl start cloudflared
+
+Enable auto-start on boot (already enabled):
+   sudo systemctl enable cloudflared
+
+DOCKER COMMANDS
+===============
+View running containers:
+   docker-compose ps
+
+Stop container:
+   docker-compose down
+
+Start container:
+   docker-compose up -d
+
+Rebuild and start (after code changes):
+   docker-compose up -d --build
+
+View logs (live):
+   docker-compose logs -f
+
+View logs (last 50 lines):
+   docker-compose logs --tail=50
+
+Restart container:
+   docker-compose restart
+
+View resource usage:
+   docker stats innera-app
+
+MONITORING & HEALTH CHECKS
+===========================
+Quick Health Check Script:
+   ~/monitor.sh  (or just type: health)
+
+Manual Checks:
+   # System overview
+   htop
+
+   # Memory usage
+   free -h
+
+   # Disk usage
+   df -h
+
+   # Container status
+   docker-compose ps
+
+   # Website accessibility
+   curl https://inneracounselling.ca
+
+Load Testing:
+   # Install Apache Bench (already installed)
+   sudo apt install apache2-utils
+
+   # Test 1000 requests, 100 concurrent
+   ab -n 1000 -c 100 http://localhost:8000/
+
+TESTING THE WEBSITE
+===================
+Local test (on server):
+   curl http://localhost:8000
+
+Public test (from anywhere):
+   curl https://inneracounselling.ca
+
+Check if FastAPI is responding:
+   curl -I http://localhost:8000
+
+Check via Cloudflare:
+   curl -I https://inneracounselling.ca
+
+Test from phone (cellular):
+   Open: https://inneracounselling.ca
+
+TROUBLESHOOTING
+===============
+Website not loading:
+1. Check if Docker is running:
+   docker-compose ps
+
+2. Check if Cloudflare Tunnel is running:
+   sudo systemctl status cloudflared
+
+3. Check Docker logs:
+   docker-compose logs web
+
+4. Check Cloudflare Tunnel logs:
+   sudo journalctl -u cloudflared -n 50
+
+5. Test local access:
+   curl http://localhost:8000
+
+6. Restart everything:
+   docker-compose restart
+   sudo systemctl restart cloudflared
+
+7. Purge Cloudflare cache:
+   - Go to Cloudflare dashboard
+   - Caching → Configuration → Purge Everything
+
+Docker build fails:
+1. Check for permission issues
+2. Remove build cache:
+   docker-compose build --no-cache
+3. Check if .env file exists:
+   ls -la ~/Desktop/innera/.env
+
+Changes not showing:
+1. Did you pull on the server? (git pull)
+2. Did you rebuild Docker? (docker-compose up -d --build)
+3. Clear browser cache (Ctrl+Shift+R or Cmd+Shift+R)
+4. Purge Cloudflare cache
+5. Try incognito/private browsing mode
+
+Redirect loop (ERR_TOO_MANY_REDIRECTS):
+1. Check Cloudflare SSL mode is "Flexible"
+2. Purge Cloudflare cache
+3. Check no redirect rules exist in Cloudflare
+4. Verify tunnel config points to http://localhost:8000 (not https)
+
+SSH connection lost:
+1. Reconnect via Tailscale IP:
+   ssh -p 2222 yusuf@100.120.234.126
+
+2. If Tailscale is down on Mac:
+   sudo tailscale up
+
+3. If Tailscale is down on server (requires physical access):
+   Reboot server, Tailscale auto-starts on boot
+
+Port 8000 not accessible locally:
+1. Check if container is running:
+   docker-compose ps
+2. Check if port is bound:
+   sudo ss -tlnp | grep 8000
+3. Restart container:
+   docker-compose restart
+
+SECURITY NOTES
+==============
+NEVER COMMIT THESE FILES:
+- .env (contains API keys)
+- *.json in ~/.cloudflared/ (tunnel credentials)
+- SSH private keys (~/.ssh/id_ed25519)
+
+API Keys & Secrets Storage:
+- Resend API Key: ~/Desktop/innera/.env
+- Cloudflare Tunnel credentials: ~/.cloudflared/b40b18d5-21c5-4e12-b1cd-3d2f9f5dc23a.json
+- SSH keys: ~/.ssh/id_ed25519
+
+Security Best Practices:
+✓ No open ports (Cloudflare Tunnel uses outbound connections only)
+✓ SSH only via Tailscale VPN (not exposed to internet)
+✓ Docker runs as non-root user (appuser)
+✓ Environment variables in .env (not in code)
+✓ Cloudflare provides DDoS protection
+✓ Local network completely isolated from public internet
+
+If API key is exposed:
+1. Revoke it immediately at resend.com
+2. Generate new key
+3. Update .env file on server:
+   nano ~/Desktop/innera/.env
+4. Restart Docker:
+   docker-compose restart
+
+Network Security:
+- Cloudflare Tunnel: Outbound-only connections
+- No port forwarding configured on router
+- Local network (192.168.4.x) completely isolated
+- Only exposed service: FastAPI on port 8000 via tunnel
+- SSH: Only accessible via Tailscale VPN (100.120.234.126:2222)
+
+BACKUPS
+=======
+Important things to backup:
+1. ~/.cloudflared/ directory (tunnel credentials)
+   cp -r ~/.cloudflared ~/Desktop/cloudflared-backup
+
+2. ~/Desktop/innera/.env (environment variables)
+   cp ~/Desktop/innera/.env ~/Desktop/env-backup
+
+3. Code is backed up on GitHub automatically
+
+Backup Commands:
+   # Full backup of critical files
+   tar -czf ~/innera-backup-$(date +%Y%m%d).tar.gz \
+     ~/.cloudflared \
+     ~/Desktop/innera/.env
+
+   # Copy to safe location (external drive, cloud storage)
+
+REGULAR MAINTENANCE
+===================
+Weekly:
+- Check if website is accessible: https://inneracounselling.ca
+- Review error logs: docker-compose logs --tail=100
+- Check disk space: df -h
+
+Monthly:
+- Update system packages:
+  sudo apt update && sudo apt upgrade
+
+- Update Docker base image:
+  cd ~/Desktop/innera
+  docker-compose build --no-cache
+  docker-compose up -d
+
+- Review Cloudflare analytics for traffic patterns
+
+As needed:
+- Purge Cloudflare cache after major changes
+- Review server logs for errors
+- Check server resource usage: htop
+
+USEFUL COMMANDS REFERENCE
+==========================
+SSH to server:
+   ssh -p 2222 yusuf@100.120.234.126
+
+Check if all services are running:
+   docker-compose ps && sudo systemctl status cloudflared
+
+Restart everything:
+   docker-compose restart && sudo systemctl restart cloudflared
+
+View all logs:
+   docker-compose logs -f &
+   sudo journalctl -u cloudflared -f
+
+Quick redeploy after code changes:
+   cd ~/Desktop/innera && git pull && docker-compose up -d --build
+
+Check server health:
+   health  (or ~/monitor.sh)
+
+One-line server status:
+   echo "Docker: $(docker-compose ps | grep Up | wc -l) | Tunnel: $(systemctl is-active cloudflared)"
+
+ADDING ADDITIONAL DOMAINS (FUTURE)
+===================================
+To add another domain (e.g., innera.ca):
+
+1. Add domain to Cloudflare
+2. Update nameservers at registrar (Porkbun)
+3. Add CNAME records in Cloudflare DNS:
+   - innera.ca → b40b18d5-21c5-4e12-b1cd-3d2f9f5dc23a.cfargotunnel.com
+   - www.innera.ca → b40b18d5-21c5-4e12-b1cd-3d2f9f5dc23a.cfargotunnel.com
+
+4. Update tunnel config on server:
+   sudo nano /etc/cloudflared/config.yml
+
+   Add new hostnames:
+   - hostname: innera.ca
+     service: http://localhost:8000
+   - hostname: www.innera.ca
+     service: http://localhost:8000
+
+5. Restart tunnel:
+   sudo systemctl restart cloudflared
+
+No code changes needed - FastAPI serves all domains the same way.
+
+Optional: Set up redirect from one domain to another in Cloudflare Rules.
+
+EMAIL ALERTS SETUP (PLANNED - NOT YET IMPLEMENTED)
+===================================================
+When ready to implement:
+1. Create ~/health-monitor.sh script
+2. Configure email alerts via Resend API
+3. Set up cron job to check every 5 minutes
+4. Monitors: Docker, Cloudflare Tunnel, website, disk, memory
+
+Checks:
+- Docker container running?
+- Cloudflare Tunnel active?
+- Website accessible from internet?
+- Disk usage < 80%?
+- Memory usage < 90%?
+
+Sends email alert if any service is down or resources are low.
+
+CONTACT & RESOURCES
+===================
+Cloudflare Dashboard: https://dash.cloudflare.com
+Tailscale Admin: https://login.tailscale.com/admin
+GitHub Repo: https://github.com/yusufgokce/innera
+Resend Dashboard: https://resend.com
+
+Documentation:
+- Cloudflare Tunnel: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/
+- FastAPI: https://fastapi.tiangolo.com
+- Docker Compose: https://docs.docker.com/compose/
+- Tailscale: https://tailscale.com/kb/
+
+EMERGENCY PROCEDURES
+====================
+Website is down:
+1. SSH to server: ssh -p 2222 yusuf@100.120.234.126
+2. Check services:
+   docker-compose ps
+   sudo systemctl status cloudflared
+3. Restart services:
+   docker-compose restart
+   sudo systemctl restart cloudflared
+4. Check logs for errors:
+   docker-compose logs --tail=50
+   sudo journalctl -u cloudflared -n 50
+5. If still down, purge Cloudflare cache
+6. Test local access: curl http://localhost:8000
+7. Test public access: curl https://inneracounselling.ca
+
+Server won't respond to SSH:
+1. Check if Tailscale is running on your Mac: tailscale status
+2. Start Tailscale if needed: sudo tailscale up
+3. Try local IP if on same network: ssh -p 2222 yusuf@192.168.4.43
+4. Physical access required if all else fails
+5. Reboot machine - all services auto-start on boot
+
+Complete system rebuild (worst case):
+1. Keep backups of:
+   - ~/.cloudflared/ directory
+   - ~/Desktop/innera/.env file
+
+2. Fresh install:
+   git clone git@github.com:yusufgokce/innera.git ~/Desktop/innera
+
+3. Restore files:
+   cp ~/Desktop/env-backup ~/Desktop/innera/.env
+   cp -r ~/Desktop/cloudflared-backup/* ~/.cloudflared/
+
+4. Install dependencies:
+   sudo apt install docker.io docker-compose
+
+5. Start services:
+   cd ~/Desktop/innera
+   docker-compose up -d --build
+
+6. Cloudflare Tunnel:
+   sudo nano /etc/cloudflared/config.yml  (restore config)
+   sudo cloudflared service install
+   sudo systemctl start cloudflared
+
+KNOWN ISSUES & SOLUTIONS
+========================
+Issue: ERR_TOO_MANY_REDIRECTS
+Solution: Cloudflare SSL mode must be "Flexible", not "Full" or "Full (strict)"
+
+Issue: Website works locally but not publicly
+Solution: Check Cloudflare Tunnel is running, purge Cloudflare cache
+
+Issue: Changes not showing after deploy
+Solution: Rebuild Docker with --build flag, purge Cloudflare cache
+
+Issue: CGNAT blocking port forwarding
+Solution: Already solved - using Cloudflare Tunnel (no ports needed)
+
+Issue: Mobile styling issues
+Solution: Updated CSS with better mobile padding (8vw 6vw)
+
+CURRENT WEBSITE CONTENT
+========================
+Homepage Headline: "Find Clarity, Compassion, and Connection"
+Subtext: "Professional counseling support in a safe, welcoming space designed for your personal growth and healing"
+
+Mobile Responsive: Yes (updated Feb 2026)
+- Proper padding on mobile: 6vw sides, 8vw top/bottom
+- Hero section: Single column on mobile
+- Navigation: Responsive (may need hamburger menu in future)
+
+===========================================
+END OF GUIDE
+===========================================
