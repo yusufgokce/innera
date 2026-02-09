@@ -5,33 +5,8 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    networks:
-      - innera-network
+    ports:
+      - "8000:8000"
     volumes:
       - ./static:/app/static:ro
       - ./templates:/app/templates:ro
-
-  caddy:
-    image: caddy:alpine
-    container_name: innera-caddy
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"  # HTTP/3 support
-    volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      - web
-    networks:
-      - innera-network
-
-networks:
-  innera-network:
-    driver: bridge
-
-volumes:
-  caddy_data:
-  caddy_config:
