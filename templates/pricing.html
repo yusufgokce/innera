@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Pricing & Services - Innera{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h2>Transparent Pricing for Quality Care</h2>
+        <p>Accessible, professional counseling services with flexible payment options</p>
+    </div>
+</section>
+
+<section class="content-section" style="background: white;">
+    <h2>Individual Therapy Sessions</h2>
+
+    <div class="two-column" style="margin-top: 3rem;">
+        <div>
+            <h3 style="font-size: 1.5rem; font-weight: 300; color: #2d2d2d; margin-bottom: 1rem;">Session Details</h3>
+            <ul class="feature-list">
+                <li><strong>Session Length:</strong> 50-60 minutes</li>
+                <li><strong>Format:</strong> Virtual sessions via Google Meet (PIPEDA-certified)</li>
+                <li><strong>Frequency:</strong> Weekly or bi-weekly (based on your needs)</li>
+                <li><strong>Booking:</strong> Easy online scheduling through Calendly</li>
+            </ul>
+        </div>
+        <div>
+            <h3 style="font-size: 1.5rem; font-weight: 300; color: #2d2d2d; margin-bottom: 1rem;">Sliding Scale Pricing</h3>
+            <p style="font-size: 1.8rem; font-weight: 300; color: #2d2d2d; margin: 1rem 0;">$80 - $120 <span style="font-size: 1rem; color: #5a5a5a;">per session</span></p>
+            <p>We offer sliding scale pricing to make therapy accessible to more people. Your rate is based on your financial situation and is discussed confidentially during the intake process.</p>
+            <p style="margin-top: 1rem; font-size: 0.95rem; color: #5a5a5a;"><em>Not sure which rate applies to you? We'll help you determine the best fit during your initial contact.</em></p>
+        </div>
+    </div>
+
+    <div style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid #e8e8e8;">
+        <h2>Insurance Coverage</h2>
+        <div class="two-column" style="margin-top: 2rem;">
+            <div>
+                <h3 style="font-size: 1.3rem; font-weight: 300; color: #2d2d2d; margin-bottom: 1rem;">✅ Available Now</h3>
+                <p><strong>Official Receipts for Reimbursement</strong></p>
+                <p>We provide detailed receipts that you can submit to your insurance provider for reimbursement. Most extended health plans in Canada cover psychotherapy services.</p>
+                <p style="margin-top: 1rem; font-size: 0.95rem;">Payment is due at the time of service, and we'll provide an official receipt you can use to claim from your insurance.</p>
+            </div>
+            <div>
+                <h3 style="font-size: 1.3rem; font-weight: 300; color: #2d2d2d; margin-bottom: 1rem;">🔄 Coming Soon</h3>
+                <p><strong>Direct Billing with Select Insurers</strong></p>
+                <p>We are in the process of setting up direct billing with major Canadian insurance providers. This will allow eligible clients to have their sessions billed directly to their insurance company.</p>
+                <p style="margin-top: 1rem; font-size: 0.95rem; color: #5a5a5a;"><em>Check back soon or contact us for updates on direct billing availability.</em></p>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; padding: 2rem; background: #f9f9f9; border-radius: 8px;">
+            <h4 style="font-size: 1.1rem; font-weight: 400; margin-bottom: 1rem;">Common Insurance Providers</h4>
+            <p style="font-size: 0.95rem; color: #5a5a5a; line-height: 1.8;">
+                Most major Canadian insurance companies cover psychotherapy services, including: <strong>Manulife, Sun Life Financial, Canada Life, Great-West Life, Blue Cross, Desjardins, Industrial Alliance, Equitable Life,</strong> and many others.
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #5a5a5a;"><em>Please verify your specific coverage with your insurance provider before booking. Look for coverage under "Registered Psychotherapist" or "Mental Health Practitioner."</em></p>
+        </div>
+    </div>
+
+    <div style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid #e8e8e8;">
+        <h2>Payment Methods</h2>
+        <div class="two-column" style="margin-top: 2rem;">
+            <div>
+                <ul class="feature-list">
+                    <li><strong>Credit/Debit Cards</strong> - Secure payment via Stripe</li>
+                    <li><strong>E-Transfer</strong> - Interac e-Transfer accepted</li>
+                    <li><strong>Payment Timing</strong> - Due at time of service</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-size: 1.1rem; font-weight: 400; margin-bottom: 1rem;">Cancellation Policy</h4>
+                <p>We require 48 hours notice for cancellations or rescheduling to avoid charges. We understand that emergencies happen and exceptions can be made.</p>
+                <p style="margin-top: 1rem;"><a href="/cancellation-policy" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">View our full cancellation policy →</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 4rem; padding: 3rem 2rem; background: #f9f9f9; border-radius: 8px;">
+        <h3 style="font-size: 1.5rem; font-weight: 300; margin-bottom: 1rem;">Ready to Get Started?</h3>
+        <p style="color: #5a5a5a; margin-bottom: 2rem;">Book your first session and begin your journey toward healing and growth.</p>
+        <a href="/book-session" class="cta-button">Book a Session</a>
+    </div>
+
+    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e8e8e8;">
+        <h4 style="font-size: 1.1rem; font-weight: 400; margin-bottom: 1rem;">Have Questions About Pricing or Insurance?</h4>
+        <p style="color: #5a5a5a;">
+            We're here to help. Contact us at <a href="mailto:hello@inneracounselling.ca" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">hello@inneracounselling.ca</a> or call <a href="tel:4164749965" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">(416) 474-9965</a>.
+        </p>
+        <p style="margin-top: 1rem;"><a href="/faq" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">Visit our FAQ page →</a></p>
+    </div>
+</section>
+{% endblock %}

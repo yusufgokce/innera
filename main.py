@@ -44,6 +44,18 @@ async def about(request: Request):
 async def contact(request: Request):
     return templates.TemplateResponse("contact.html", {"request": request, "active_page": "contact"})
 
+@app.get("/pricing", response_class=HTMLResponse)
+async def pricing(request: Request):
+    return templates.TemplateResponse("pricing.html", {"request": request, "active_page": "pricing"})
+
+@app.get("/faq", response_class=HTMLResponse)
+async def faq(request: Request):
+    return templates.TemplateResponse("faq.html", {"request": request, "active_page": "faq"})
+
+@app.get("/cancellation-policy", response_class=HTMLResponse)
+async def cancellation_policy(request: Request):
+    return templates.TemplateResponse("cancellation.html", {"request": request, "active_page": "cancellation"})
+
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
     return FileResponse("static/images/logo.svg")

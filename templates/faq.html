@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}FAQ - Innera{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h2>Frequently Asked Questions</h2>
+        <p>Common questions about therapy, pricing, privacy, and our services</p>
+    </div>
+</section>
+
+<section class="content-section" style="background: white;">
+    <div style="max-width: 900px; margin: 0 auto;">
+
+        <!-- Getting Started -->
+        <div style="margin-bottom: 3rem;">
+            <h3 style="font-size: 1.8rem; font-weight: 300; color: #2d2d2d; margin-bottom: 2rem; border-bottom: 1px solid #e8e8e8; padding-bottom: 0.5rem;">Getting Started</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">What should I expect in my first session?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">Your first session is an opportunity for us to get to know each other. We'll discuss what brings you to therapy, your goals, and what you hope to achieve. This is also a time for you to ask questions and see if we're a good fit. There's no pressure—therapy is a collaborative process, and it's important that you feel comfortable.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">How do I book an appointment?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">You can book directly through our online scheduling system on the <a href="/book-session" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">Book a Session</a> page. Simply select a time that works for you, and you'll receive a confirmation email with the Google Meet link for your virtual session. If you have questions before booking, feel free to <a href="/contact" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">contact us</a>.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">Do I need a referral?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">No, you do not need a referral to book therapy sessions with Innera. You can book directly online or contact us to get started.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">What platform do you use for virtual sessions?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">All sessions are conducted via Google Meet with a PIPEDA-certified configuration to ensure your privacy and security. You'll receive a secure meeting link via email after booking.</p>
+            </div>
+        </div>
+
+        <!-- Pricing & Insurance -->
+        <div style="margin-bottom: 3rem;">
+            <h3 style="font-size: 1.8rem; font-weight: 300; color: #2d2d2d; margin-bottom: 2rem; border-bottom: 1px solid #e8e8e8; padding-bottom: 0.5rem;">Pricing & Insurance</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">What is your sliding scale pricing?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">Our sessions range from $80-120 per 50-60 minute session, based on a sliding scale. Your rate is determined by your financial situation and is discussed confidentially during the intake process. We believe therapy should be accessible, and we work with clients to find a rate that works for them. Visit our <a href="/pricing" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">Pricing page</a> for more details.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">Do you accept insurance?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">Yes! We provide official receipts that you can submit to your insurance provider for reimbursement. Most Canadian extended health plans cover psychotherapy services under "Registered Psychotherapist" or "Mental Health Practitioner." Direct billing with select insurers is coming soon. Please check with your insurance provider about your specific coverage before booking.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">What payment methods do you accept?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">We accept credit/debit cards via Stripe and Interac e-Transfer. Payment is due at the time of service.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">Do you offer a free consultation?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">While we don't offer free sessions, we're happy to answer questions via email or phone before you book. Reach out to us at <a href="mailto:hello@inneracounselling.ca" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">hello@inneracounselling.ca</a> or <a href="tel:4164749965" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">(416) 474-9965</a> if you'd like to discuss whether our services are right for you.</p>
+            </div>
+        </div>
+
+        <!-- Sessions & Scheduling -->
+        <div style="margin-bottom: 3rem;">
+            <h3 style="font-size: 1.8rem; font-weight: 300; color: #2d2d2d; margin-bottom: 2rem; border-bottom: 1px solid #e8e8e8; padding-bottom: 0.5rem;">Sessions & Scheduling</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">How long are sessions?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">Standard individual therapy sessions are 50-60 minutes long.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">Are sessions virtual or in-person?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">All sessions are currently conducted virtually via secure Google Meet video calls. This allows for flexibility and accessibility from the comfort of your own space.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">What is your cancellation policy?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">We require 48 hours advance notice for cancellations or rescheduling to avoid being charged the full session fee. We understand that emergencies and extenuating circumstances occur, and exceptions can be made. Please see our <a href="/cancellation-policy" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">full cancellation policy</a> for details.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">How often should I attend therapy?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">This depends on your individual needs and goals. Many clients start with weekly sessions and may transition to bi-weekly as they progress. We'll work together to determine the frequency that best supports your therapeutic journey.</p>
+            </div>
+        </div>
+
+        <!-- Privacy & Confidentiality -->
+        <div style="margin-bottom: 3rem;">
+            <h3 style="font-size: 1.8rem; font-weight: 300; color: #2d2d2d; margin-bottom: 2rem; border-bottom: 1px solid #e8e8e8; padding-bottom: 0.5rem;">Privacy & Confidentiality</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">Is therapy confidential?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">Yes, absolutely. Everything you share in therapy is confidential and protected by law. There are only a few legal exceptions where confidentiality must be broken: if there is a risk of harm to yourself or others, if there is suspected abuse of a child or vulnerable person, or if required by a court order. These situations are rare, and we will always discuss them with you if they arise.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem; padding: 2rem; background: #f9f9f9; border-left: 3px solid #2d2d2d;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 1rem;">PIPEDA Compliance Statement</h4>
+                <p style="color: #5a5a5a; line-height: 1.8; margin-bottom: 1rem;">Innera fully complies with Canada's <strong>Personal Information Protection and Electronic Documents Act (PIPEDA)</strong>, which governs how private-sector organizations collect, use, and disclose personal information.</p>
+
+                <p style="color: #5a5a5a; line-height: 1.8; margin-bottom: 1rem;"><strong>How we protect your information:</strong></p>
+                <ul style="color: #5a5a5a; line-height: 1.8; margin-left: 1.5rem;">
+                    <li>All personal health information is stored securely using encrypted, password-protected systems</li>
+                    <li>Virtual sessions are conducted via PIPEDA-certified Google Meet with end-to-end encryption</li>
+                    <li>We collect only the information necessary to provide counseling services</li>
+                    <li>Your information is never shared with third parties without your explicit written consent, except as required by law</li>
+                    <li>Clinical notes and records are kept confidential and secure</li>
+                </ul>
+
+                <p style="color: #5a5a5a; line-height: 1.8; margin-top: 1rem; margin-bottom: 1rem;"><strong>Your rights under PIPEDA:</strong></p>
+                <ul style="color: #5a5a5a; line-height: 1.8; margin-left: 1.5rem;">
+                    <li><strong>Access:</strong> You have the right to access your personal health information</li>
+                    <li><strong>Correction:</strong> You can request corrections to your information if it's inaccurate</li>
+                    <li><strong>Withdrawal:</strong> You can withdraw consent for certain uses of your information</li>
+                    <li><strong>Complaints:</strong> You have the right to file a complaint if you believe your privacy rights have been violated</li>
+                </ul>
+
+                <p style="color: #5a5a5a; line-height: 1.8; margin-top: 1rem;">For questions about how we handle your personal information, please contact us at <a href="mailto:hello@inneracounselling.ca" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">hello@inneracounselling.ca</a>.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem; margin-top: 2rem; padding: 1.5rem; background: #fff; border: 1px solid #e8e8e8;">
+                <h4 style="font-size: 1.1rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">Note on HIPAA</h4>
+                <p style="color: #5a5a5a; line-height: 1.8; font-size: 0.95rem;">HIPAA (Health Insurance Portability and Accountability Act) is United States legislation. While we serve clients in Canada and comply with Canadian privacy laws under PIPEDA, our privacy and security standards meet or exceed equivalent protections provided by HIPAA.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">Are sessions recorded?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">No, therapy sessions are never recorded. What you share stays between you and your therapist.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">Who has access to my information?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">Only your therapist (Elif Gökçe) has access to your clinical information. Information is never shared with anyone else without your written consent, except in the rare legal exceptions mentioned above (risk of harm, abuse, court order).</p>
+            </div>
+        </div>
+
+        <!-- Therapeutic Approach -->
+        <div style="margin-bottom: 3rem;">
+            <h3 style="font-size: 1.8rem; font-weight: 300; color: #2d2d2d; margin-bottom: 2rem; border-bottom: 1px solid #e8e8e8; padding-bottom: 0.5rem;">Therapeutic Approach</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">What therapy approaches do you use?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">Elif integrates various evidence-based therapeutic modalities tailored to each client's unique needs, including Cognitive Behavioural Therapy (CBT), Acceptance and Commitment Therapy, Dialectical Behaviour Therapy, Mindfulness, Trauma-Informed approaches, and more. Learn more about Elif's approach on the <a href="/about" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">About page</a>.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">How long does therapy take?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">The length of therapy varies for each person and depends on your goals, the issues you're working on, and your progress. Some clients find relief in a few sessions, while others benefit from longer-term support. We'll regularly check in about your progress and adjust our approach as needed.</p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 1.2rem; font-weight: 400; color: #2d2d2d; margin-bottom: 0.5rem;">Can I bring a family member to sessions?</h4>
+                <p style="color: #5a5a5a; line-height: 1.8;">Individual therapy sessions are typically one-on-one between you and your therapist. However, if you feel it would be beneficial to include a family member or partner in a session, we can discuss this possibility.</p>
+            </div>
+        </div>
+
+        <!-- Still Have Questions? -->
+        <div style="text-align: center; margin-top: 4rem; padding: 2rem; background: #f9f9f9; border-radius: 8px;">
+            <h3 style="font-size: 1.3rem; font-weight: 400; margin-bottom: 1rem;">Still Have Questions?</h3>
+            <p style="color: #5a5a5a; margin-bottom: 1.5rem;">We're here to help. Don't hesitate to reach out.</p>
+            <p>
+                <a href="mailto:hello@inneracounselling.ca" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d; margin-right: 1.5rem;">hello@inneracounselling.ca</a>
+                <a href="tel:4164749965" style="color: #2d2d2d; border-bottom: 1px solid #2d2d2d;">(416) 474-9965</a>
+            </p>
+            <p style="margin-top: 1.5rem;"><a href="/contact" class="cta-button">Contact Us</a></p>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
