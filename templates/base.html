@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Innera{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="/static/images/logo.svg">
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
 </head>
 <body>
     <header>
@@ -15,6 +16,13 @@
                     <h1>Innera</h1>
                 </a>
             </div>
+
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <ul class="nav-links">
                 <li><a href="/home" class="{% if active_page == 'home' %}active{% endif %}">Home</a></li>
                 <li><a href="/about" class="{% if active_page == 'about' %}active{% endif %}">About</a></li>
@@ -32,6 +40,7 @@
         <p>&copy; 2026 Innera Counselling. All rights reserved. | <a href="https://www.appmybizaccount.gov.on.ca/onbis/businessnames/viewInstance/view.pub?id=185e6c856f92f2744af3ee5b87a9ed2f6326e0ba0e11b719cabc6f9245f61d01&_timestamp=4868474170034312" target="_blank" rel="noopener noreferrer" style="color: #5a5a5a; text-decoration: none; border-bottom: 1px solid #5a5a5a; padding-bottom: 1px;">Ontario Business Registry</a></p>
     </footer>
     <script>
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -46,6 +55,37 @@
                 }
             });
         });
+
+        // Mobile hamburger menu toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (navToggle) {
+            navToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('nav-active');
+                navToggle.classList.toggle('is-active');
+                navToggle.setAttribute('aria-expanded', navLinks.classList.contains('nav-active'));
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('nav-active');
+                    navToggle.classList.remove('is-active');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInside = navLinks.contains(event.target) || navToggle.contains(event.target);
+                if (!isClickInside && navLinks.classList.contains('nav-active')) {
+                    navLinks.classList.remove('nav-active');
+                    navToggle.classList.remove('is-active');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
     </script>
 </body>
 </html>

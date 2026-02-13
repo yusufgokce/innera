@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <style>
+      @keyframes breathe {
+        0%, 100% {
+          d: path("M 100 20 C 140 20 180 40 180 80 C 180 120 160 160 120 180 C 80 200 40 180 20 140 C 0 100 20 60 60 40 C 80 30 90 20 100 20 Z");
+          opacity: 0.6;
+        }
+        50% {
+          d: path("M 100 30 C 130 30 170 50 170 80 C 170 110 150 150 110 165 C 70 180 30 165 15 125 C 0 85 15 55 55 40 C 75 32 92 30 100 30 Z");
+          opacity: 0.8;
+        }
+      }
+
+      .breathing-blob {
+        animation: breathe 4s ease-in-out infinite;
+        fill: #2d2d2d;
+      }
+    </style>
+  </defs>
+
+  <path class="breathing-blob" d="M 100 20 C 140 20 180 40 180 80 C 180 120 160 160 120 180 C 80 200 40 180 20 140 C 0 100 20 60 60 40 C 80 30 90 20 100 20 Z"/>
+</svg>
