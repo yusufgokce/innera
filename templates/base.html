@@ -6,6 +6,7 @@
     <title>{% block title %}Innera{% endblock %}</title>
     <link rel="icon" type="image/svg+xml" href="/static/images/logo.svg">
     <link rel="stylesheet" href="/static/css/style.css?v=3">
+    {% block head %}{% endblock %}
 </head>
 <body>
     <header>
@@ -26,6 +27,7 @@
             <ul class="nav-links">
                 <li><a href="/home" class="{% if active_page == 'home' %}active{% endif %}">Home</a></li>
                 <li><a href="/about" class="{% if active_page == 'about' %}active{% endif %}">About</a></li>
+                <li><a href="/therapy" class="{% if active_page == 'therapy' %}active{% endif %}">Therapy</a></li>
                 <li><a href="/contact" class="{% if active_page == 'contact' %}active{% endif %}">Contact</a></li>
                 <li><a href="/book-session" class="btn-book">Book A Session</a></li>
             </ul>
@@ -50,6 +52,7 @@
             <div class="footer-section">
                 <h4>Resources</h4>
                 <ul>
+                    <li><a href="/therapy">Therapy Approaches</a></li>
                     <li><a href="/pricing">Pricing & Services</a></li>
                     <li><a href="/faq">FAQ</a></li>
                     <li><a href="/cancellation-policy">Cancellation Policy</a></li>

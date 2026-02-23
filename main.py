@@ -56,6 +56,55 @@ async def faq(request: Request):
 async def cancellation_policy(request: Request):
     return templates.TemplateResponse("cancellation.html", {"request": request, "active_page": "cancellation"})
 
+# Therapy Hub and Individual Therapy Pages (SEO-focused pages)
+@app.get("/therapy", response_class=HTMLResponse)
+async def therapy_hub(request: Request):
+    return templates.TemplateResponse("seo/therapy.html", {"request": request, "active_page": "therapy"})
+
+@app.get("/therapy/cbt", response_class=HTMLResponse)
+async def therapy_cbt(request: Request):
+    return templates.TemplateResponse("seo/therapy_cbt.html", {"request": request, "active_page": "therapy"})
+
+@app.get("/therapy/trauma-informed", response_class=HTMLResponse)
+async def therapy_trauma(request: Request):
+    return templates.TemplateResponse("seo/therapy_trauma.html", {"request": request, "active_page": "therapy"})
+
+@app.get("/therapy/dbt", response_class=HTMLResponse)
+async def therapy_dbt(request: Request):
+    return templates.TemplateResponse("seo/therapy_dbt.html", {"request": request, "active_page": "therapy"})
+
+@app.get("/therapy/mindfulness", response_class=HTMLResponse)
+async def therapy_mindfulness(request: Request):
+    return templates.TemplateResponse("seo/therapy_mindfulness.html", {"request": request, "active_page": "therapy"})
+
+@app.get("/therapy/act", response_class=HTMLResponse)
+async def therapy_act(request: Request):
+    return templates.TemplateResponse("seo/therapy_act.html", {"request": request, "active_page": "therapy"})
+
+@app.get("/therapy/attachment-therapy", response_class=HTMLResponse)
+async def therapy_attachment(request: Request):
+    return templates.TemplateResponse("seo/therapy_attachment.html", {"request": request, "active_page": "therapy"})
+
+@app.get("/therapy/solution-focused", response_class=HTMLResponse)
+async def therapy_sfbt(request: Request):
+    return templates.TemplateResponse("seo/therapy_sfbt.html", {"request": request, "active_page": "therapy"})
+
+@app.get("/therapy/internal-family-systems", response_class=HTMLResponse)
+async def therapy_ifs(request: Request):
+    return templates.TemplateResponse("seo/therapy_ifs.html", {"request": request, "active_page": "therapy"})
+
+@app.get("/therapy/narrative-therapy", response_class=HTMLResponse)
+async def therapy_narrative(request: Request):
+    return templates.TemplateResponse("seo/therapy_narrative.html", {"request": request, "active_page": "therapy"})
+
+@app.get("/therapy/person-centred", response_class=HTMLResponse)
+async def therapy_person_centred(request: Request):
+    return templates.TemplateResponse("seo/therapy_person_centred.html", {"request": request, "active_page": "therapy"})
+
+@app.get("/therapy/spiritual-care", response_class=HTMLResponse)
+async def therapy_spiritual(request: Request):
+    return templates.TemplateResponse("seo/therapy_spiritual.html", {"request": request, "active_page": "therapy"})
+
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
     return FileResponse("static/images/logo.svg")
